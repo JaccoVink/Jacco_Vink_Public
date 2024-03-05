@@ -1,0 +1,96 @@
+###############################################################################
+#
+#
+# FILE   : Makefile_dirs in
+# AUTHOR : Jacco Vink
+#
+# 
+###############################################################################
+
+
+###############################################################################
+#  
+# Should be include by other Makefiles. Contains standard directories
+#
+###############################################################################
+
+# Compilers
+#
+CC  = gcc	# standard C compiler
+CPP = g++	# standard C++ compiler
+
+
+#
+# linker
+AR= ar rc     
+# second step in .a creation (use "touch" if not needed)
+AR2= ranlib
+
+
+# Directories
+#
+# change this to your favorite location
+JVTOOLS = $(HOME)/code/j_vink_public_code
+
+
+
+
+USRLIB= /usr/lib/
+LIB_DIR1= $(JVTOOLS)/lib/
+BIN = $(JVTOOLS)/bin/
+
+
+SRC = ../src/
+OBJ = ../obj/
+INC = ../inc/
+
+
+CCODE  = $(HOME)/code/
+BASE   = $(JVTOOLS)/base/
+IMAGE  = $(JVTOOLS)/imaging/
+TIME   = $(JVTOOLS)/timing/
+JVPGPLOT = $(JVTOOLS)/pgplot
+EIGEN  = $(JVTOOLS)
+GENERAL= $(JVTOOLS)/include
+
+#
+# change the following if you have cfitsio installed and do not have HEASOFT
+#
+CFITSIO = $(HEADAS)
+
+
+# PGPLOTSRC contains *.h files PGPLOT the library
+PGPLOTSRC = $HEADAS
+PGPLOT = $(HEADAS)
+
+
+
+CCFLAGS= -Wall -fPIC \
+	 -Wno-write-strings \
+	-iquote $(GENERAL) -iquote $(INC) \
+	-iquote $(CFITSIO)/include  -iquote $(PGPLOT) \
+	-iquote $(BASE)/inc -I $(IMAGE)/inc \
+	-iquote $(JVPGPLOT)/inc/  \
+	-iquote $(EIGEN)  
+
+
+	
+
+
+#CCFLAGS2 = $(CCFLAGS) -I$(PGPLOT)
+
+#CPPFLAGS=$(CCFLAGS)
+
+
+
+LIBS = -L$(USRLIB) -L$(CFITSIO)/lib -L/usr/local/lib  \
+     -L$(PGPLOT) -L$(LIB_DIR1) -ljvtools_pgplot \
+       -ljvtools_image -ljvtools_basic  \
+       -lcpgplot -L$(PGPLOT)/lib -lpgplot \
+	-lcfitsio -lm  -lgfortran -L/usr/X11/lib/ -lX11
+
+
+
+
+
+
