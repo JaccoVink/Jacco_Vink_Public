@@ -138,6 +138,10 @@ namespace jvtools{
       inline void set_defaultname(char str[]) const{
 	strncpy(defaultname, str, FLEN_STATUS-1);
       }//set_basename()
+      Status setDetector(const string &name){
+	strncpy(detector,name.c_str(),FLEN_VALUE);
+	return SUCCESS;
+      };
       virtual Status reset_keywords();
       virtual Status resetKeywords();
       virtual Status copy_keywords( BasicData const &obs );

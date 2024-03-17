@@ -3,12 +3,12 @@
 
 /*****************************************************************************/
 //
-// FILE        :  jvtools_montecarlo.h
+// FILE        :  jvtools_polarization.h
 // AUTHOR      :  Jacco Vink 
 // DESCRIPTION :  
 //
 //
-// COPYRIGHT   : Jacco Vink, 2015
+// COPYRIGHT   : Jacco Vink, 2015/24
 //
 /*****************************************************************************/
 //  MODIFICATIONS :                                                           
@@ -32,6 +32,8 @@ using namespace::jvtools;
 
 
 
+
+
 typedef enum{
   radial=1, tangential=2, uniform=3, none=4, maps=5
 } PolarizationType;
@@ -41,6 +43,8 @@ typedef enum{
   unidirectional=0, circle=1, ring=2, ellipse=3, image=4
 } PolarizationModel;
 
+
+Status generatePolarisationVectors(const Image &polAngleMap, const Image &mask, const string &outputName);
 
 
 double calculate_fx(double x);

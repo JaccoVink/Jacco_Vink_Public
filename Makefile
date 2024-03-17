@@ -49,6 +49,9 @@ tools:
 	cd imaging/src && make imagetools;
 
 
+ixpe:
+	cd imaging/src && make ixpesmooth;
+
 pca:
 	cd pca_eigen/src && make pcaim;
 

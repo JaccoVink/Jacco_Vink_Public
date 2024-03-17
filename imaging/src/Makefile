@@ -77,6 +77,11 @@ clipim: clipim.cc
 	$(CPP) $(CCFLAGS) -o $(BIN)/clipim clipim.cc $(LIBS)
 
 
+#
+#
+#
+ixpesmooth: ixpesmooth.cc ixpesmooth_stokes.cc
+	$(CPP) $(CCFLAGS) -o  $(BIN)/ixpesmooth ixpesmooth.cc ixpesmooth_stokes.cc $(LIBS) 
 
 #
 #

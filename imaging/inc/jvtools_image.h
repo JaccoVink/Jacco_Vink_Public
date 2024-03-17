@@ -616,7 +616,18 @@ namespace jvtools{
 				   int vector=1,
 				   bool colorCode=false,
 				   bool plotCircles=false
-				  );      
+				  );
+      Status polarizationVectorsX( const string &regionFileName,
+				   const Image &stokesQ,
+				   const Image &stokesU,
+				   const Image &chiSqr,
+				   bool magneticvectors=false,		   
+				   int deltapix=5,
+				   int vector=1,
+				   float minChiSqr1=6.18,
+				   float minChiSqr2=11.83,
+				   const string &color1="cyan",
+				   const string &color2="magenta");      
       Status chiSqr_to_Pvalue(const Image &chiSQR);
       Status plotCorrelation(Image *image2, PGPlot *window);
       

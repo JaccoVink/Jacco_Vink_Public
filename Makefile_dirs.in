@@ -30,7 +30,12 @@ AR2= ranlib
 # Directories
 #
 # change this to your favorite location
-JVTOOLS = $(HOME)/code/j_vink_public_code
+ifndef $(JVTOOLS)
+# JVTOOLS not defined, assume it is your current work directory
+  JVTOOLS = $(HOME)/code/j_vink_public_code/
+endif
+
+
 
 
 
@@ -51,7 +56,7 @@ IMAGE  = $(JVTOOLS)/imaging/
 TIME   = $(JVTOOLS)/timing/
 JVPGPLOT = $(JVTOOLS)/pgplot
 EIGEN  = $(JVTOOLS)
-GENERAL= $(JVTOOLS)/include
+
 
 #
 # change the following if you have cfitsio installed and do not have HEASOFT
@@ -67,7 +72,7 @@ PGPLOT = $(HEADAS)
 
 CCFLAGS= -Wall -fPIC \
 	 -Wno-write-strings \
-	-iquote $(GENERAL) -iquote $(INC) \
+	-iquote $(JVTOOLS)/include -iquote $(INC) \
 	-iquote $(CFITSIO)/include  -iquote $(PGPLOT) \
 	-iquote $(BASE)/inc -I $(IMAGE)/inc \
 	-iquote $(JVPGPLOT)/inc/  \
@@ -75,13 +80,6 @@ CCFLAGS= -Wall -fPIC \
 
 
 	
-
-
-#CCFLAGS2 = $(CCFLAGS) -I$(PGPLOT)
-
-#CPPFLAGS=$(CCFLAGS)
-
-
 
 LIBS = -L$(USRLIB) -L$(CFITSIO)/lib -L/usr/local/lib  \
      -L$(PGPLOT) -L$(LIB_DIR1) -ljvtools_pgplot \
