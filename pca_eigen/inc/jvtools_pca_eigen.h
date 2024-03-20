@@ -17,6 +17,7 @@
 /*****************************************************************************/
 #include <iostream>
 #include "Eigen/Dense"
+#include "jvtools_pca_eigen.h"
 #include "jvtools_image.h"
 
 using namespace std;
@@ -52,7 +53,9 @@ namespace jvtools{
 		       float applySelection=-1.0);
 
 
-    
+    int getNimages(){
+      return nn;
+    };
     Status plotEigenValues( const string &device);  
 
     Status toggleUseMesh(){

@@ -34,6 +34,7 @@ int main(int argc, char *argv[] )
 
 
   int binfactor=1, levels=3;
+  int recon_im_nr=-1, recon_pca_max=6;
   double minCnts=500.0, clipmin=0.0, pcselect=1.0;
   bool chatty=false, savemasks=false, savescores=false, reconstruct=false;
   bool plotScorePoints=false, greenmonster=false;
@@ -65,8 +66,15 @@ int main(int argc, char *argv[] )
 	savescores =true;
       }else if( strncasecmp("-plotscores",argv[i],11) == 0){
 	plotScorePoints=true;
-      }else if( strncasecmp("-reconstruct",argv[i],6) == 0){
+      }else if( strncasecmp("-reconstruct",argv[i],12) == 0){
 	reconstruct=true;
+	if( strncasecmp("-reconstruct=all",argv[i],16) == 0){
+	  recon_im_nr=-1;
+	  recon_pca_max=6;
+	}else 	if( strncasecmp("-reconstruct=",argv[i],13) == 0){
+	  sscanf(argv[i]+13,"%i %i",&recon_im_nr, &recon_pca_max);
+	}
+	printf("\tNoise reduction output on, for image %i using max PC=%i\n",recon_im_nr, recon_pca_max);
       }else if( strncasecmp("-mesh",argv[i],5)==0 ){
 	pca.toggleUseMesh();
 	if( strncasecmp("-mesh=",argv[i],6)==0 ){
@@ -108,22 +116,19 @@ int main(int argc, char *argv[] )
 #endif
 
   if( reconstruct ){
-    for(int i=0; i< 86; i++){
-      if( i % 4 ==0 ){
-	//	pca.reconstruct(i+1,6);
-	pca.reconstruct(i+1,3);
-	pca.reconstruct(i+1,8);
-	pca.reconstruct(i+1,12);		
-      //    pca.reconstruct(i+1,10);
-	//	pca.reconstruct(i+1,40 );        
-	  //      pca.reconstruct(i+1,28,5);
+    int nim=pca.getNimages();
+    int pcamax=MIN( recon_pca_max, nim-1);
+    
+    printf("\t*** Number of input images = %i\n", nim);
+    printf("\t*** Denoising using scores up to PC%i\n", pcamax);
+    if( recon_im_nr== -1 ){ // denoise all input images
+      for(int i=0; i< nim; i++){
+	pca.reconstruct(i+1, pcamax);
       }
-    }//for
-
-    JVMessages::message("*****");
+    }else
+      pca.reconstruct(recon_im_nr, pcamax);
+    
   }//if
-
-  
 
 
   

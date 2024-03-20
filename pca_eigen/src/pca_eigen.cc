@@ -40,7 +40,7 @@ Pca::Pca( const string& outputname )
   
   clipMin=0.0;
   minCounts=500.0;
-  binfactor=2;
+  binfactor=1;
 
   normalize = true;
   pcaComputed = false;
